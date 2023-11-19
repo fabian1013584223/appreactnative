@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import { Text, View, StyleSheet, Pressable, Modal } from "react-native";
+import React, { useState } from "react";
+import Formulario from "./src/componentes/Formulario";
 
-function App() {
+export default function App() {
+  const [modalVisible, setModalVisible] = useState(false);
+  console.log(modalVisible);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.titulo}>
+        Administrador de citas <Text style={styles.tituloid}>Veterinaria</Text>
+      </Text>
+      <Pressable
+        onPress={() => setModalVisible(!modalVisible)}
+        style={styles.btnNuevaCita}
+      >
+        <Text style={styles.btnTextNuevaCita}>Nueva cita</Text>
+      </Pressable>
+      <Formulario
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
+    </View>
   );
 }
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f3f4f6",
+    padding: 8,
+  },
+  titulo: {
+    margin: 24,
+    fontSize: 30,
+    textTransform: "uppercase",
+    fontWeight: 600,
+    color: "#374151",
+    textAlign: "center",
+  },
+  tituloid: {
+    fontWeight: 900,
+    color: "#6D28D9",
+  },
+  btnNuevaCita: {
+    backgroundColor: "#6D28D9",
+    padding: 15,
+    marginTop: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 10,
+  },
+  btnTextNuevaCita: {
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: 900,
+    textTransform: "uppercase",
+  },
+});
